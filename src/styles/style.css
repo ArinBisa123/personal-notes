@@ -6,8 +6,8 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #202124;
-  color: white;
+  background-color: #ffafcc;
+  color: black;
 }
 
 input,
@@ -16,14 +16,14 @@ textarea {
   margin: 12px 0;
   font-family: "Inter", sans-serif;
   background-color: transparent;
-  color: white;
-  border: 1px solid #aaa;
+  color: black;
+  border: 5px solid #cdb4db;
   border-radius: 4px;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #aaa;
+  color: black;
   font-weight: bold;
 }
 
@@ -32,7 +32,7 @@ textarea::placeholder {
   align-items: center;
   justify-content: center;
   padding: 4px 16px;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 3px solid #cdb4db;
 }
 
 .note-app__header h1 {
@@ -71,7 +71,7 @@ textarea::placeholder {
 .note-input__title__char-limit {
   font-size: 14px;
   text-align: right;
-  color: #aaa;
+  color: black;
 }
 
 .note-input__body {
@@ -85,7 +85,7 @@ textarea::placeholder {
   background-color: transparent;
   font-family: "Inter", sans-serif;
   color: white;
-  border: 1px solid #aaa;
+  border: 1px solid #cdb4db;
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
