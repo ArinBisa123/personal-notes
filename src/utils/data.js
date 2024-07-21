@@ -91,6 +91,9 @@ let notes = [
 function getNotes() {
   return notes;
 }
+function getNoteByID(id) {
+  return notes.filter((note) => note.id === id);
+}
 function deleteNote(id) {
   notes = notes.filter((note) => note.id !== id);
 }
@@ -105,4 +108,4 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options);
 };
 
-export { getNotes, deleteNote, showFormattedDate };
+export { getNotes, getNoteByID, deleteNote, showFormattedDate };
