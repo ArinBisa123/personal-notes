@@ -1,11 +1,6 @@
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-import {
-  getNotes,
-  deleteNote,
-  showFormattedDate,
-  archiveNote,
-} from "../utils/data";
+import { getNotes, deleteNote, showFormattedDate } from "../utils/data";
 import React from "react";
 import InputField from "../components/InputField";
 
@@ -26,8 +21,10 @@ class Homepage extends React.Component {
     this.setState({ notes: getNotes() });
   }
   onArchiveHandler(id) {
-    const statusNote = archiveNote(id);
-    this.setState({ notes: statusNote });
+    const archiveNote = this.state.notes.map((note) =>
+      note.id === id ? { ...note, archived: !note.archived } : note
+    );
+    this.setState({ notes: archiveNote });
   }
   onAddNoteHandler({ title, body }) {
     this.setState((prevState) => {
