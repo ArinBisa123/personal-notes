@@ -28,15 +28,4 @@ class DetailPage extends React.Component {
   }
 }
 
-// function DetailPage() {
-//   const navigate = useNavigate();
-//   navigate("/detail");
-//   return (
-//     <>
-//       <h2>Detail Catatan</h2>
-//       <NoteItemBody></NoteItemBody>
-//     </>
-//   );
-// }
-
 export default DetailPageWrapper;

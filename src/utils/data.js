@@ -91,19 +91,6 @@ let notes = [
 function getNotes() {
   return notes;
 }
-
-function addNote({ title, body }) {
-  notes = [
-    ...notes,
-    {
-      id: +new Date(),
-      title,
-      body,
-      createdAt: showFormattedDate(+new Date(), "yyyy/MM/dd kk:mm:ss"),
-      archived: false,
-    },
-  ];
-}
 function deleteNote(id) {
   notes = notes.filter((note) => note.id !== id);
 }
@@ -123,4 +110,4 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options);
 };
 
-export { getNotes, addNote, deleteNote, archiveNote, showFormattedDate };
+export { getNotes, deleteNote, archiveNote, showFormattedDate };

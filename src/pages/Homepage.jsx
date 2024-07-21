@@ -1,6 +1,11 @@
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-import { getNotes, deleteNote, archiveNote, addNote } from "../utils/data";
+import {
+  getNotes,
+  deleteNote,
+  showFormattedDate,
+  archiveNote,
+} from "../utils/data";
 import React from "react";
 import InputField from "../components/InputField";
 
@@ -21,11 +26,24 @@ class Homepage extends React.Component {
     this.setState({ notes: getNotes() });
   }
   onArchiveHandler(id) {
-    archiveNote(id);
-    this.setState({ notes: getNotes() });
+    const statusNote = archiveNote(id);
+    this.setState({ notes: statusNote });
   }
   onAddNoteHandler({ title, body }) {
-    addNote(title, body);
+    this.setState((prevState) => {
+      return {
+        notes: [
+          ...prevState.notes,
+          {
+            id: +new Date(),
+            title,
+            body,
+            createdAt: showFormattedDate(+new Date(), "yyyy/MM/dd kk:mm:ss"),
+            archived: false,
+          },
+        ],
+      };
+    });
   }
   onSearchHandler(event) {
     this.setState(() => {

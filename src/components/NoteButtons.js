@@ -6,8 +6,15 @@ function NoteButtons({ id, archived, onDelete, onArchive }) {
       <button className="note-item__delete-button" onClick={() => onDelete(id)}>
         Hapus
       </button>
-      <button className="note-item__archive-button" onClick={() => onArchive(id)} archived={archived.toString()}>
-        {archived? "Pindahkan":"Arsipkan"}
+      <button
+        className="note-item__archive-button"
+        onClick={() => {
+          onArchive(id);
+          console.log("ok");
+        }}
+        archived={archived.toString()}
+      >
+        {archived ? "Pindahkan" : "Arsipkan"}
       </button>
     </div>
   );
