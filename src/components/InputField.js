@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class InputField extends React.Component {
   constructor(props) {
@@ -46,13 +47,30 @@ class InputField extends React.Component {
   render() {
     return (
       <form className="note-input" onSubmit={this.onSubmitEventHandler}>
-        <p className="note-input__title__char-limit">Sisa Karakter {this.state.limit}</p>
-        <input className="note-input__title" type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventHandler}></input>
-        <textarea className="note-input__body" type="text" placeholder="Tuliskan Deskripsi Catatan..." value={this.state.body} onChange={this.onBodyChangeEventHandler} />
+        <p className="note-input__title__char-limit">
+          Sisa Karakter {this.state.limit}
+        </p>
+        <input
+          className="note-input__title"
+          type="text"
+          placeholder="Judul"
+          value={this.state.title}
+          onChange={this.onTitleChangeEventHandler}
+        ></input>
+        <textarea
+          className="note-input__body"
+          type="text"
+          placeholder="Tuliskan Deskripsi Catatan..."
+          value={this.state.body}
+          onChange={this.onBodyChangeEventHandler}
+        />
         <button type="submit">Buat</button>
       </form>
     );
   }
 }
+InputField.propTypes = {
+  addNote: PropTypes.func.isRequired,
+};
 
 export default InputField;

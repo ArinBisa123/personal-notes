@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import React from "react";
 import { getNoteByID } from "../utils/data";
 import NoteItemBody from "../components/NoteItemBody";
+import PropTypes from "prop-types";
 
 function DetailPageWrapper() {
   const { id } = useParams();
@@ -30,4 +31,7 @@ class DetailPage extends React.Component {
     );
   }
 }
+DetailPage.propTypes = {
+  id: PropTypes.number.isRequired,
+};
 export default DetailPageWrapper;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { showFormattedDate } from "../utils/data";
+import PropTypes from "prop-types";
 
 function NoteItemBody({ id, title, body, createdAt }) {
   return (
@@ -14,10 +15,10 @@ function NoteItemBody({ id, title, body, createdAt }) {
   );
 }
 
-// NoteItemBody.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   title: PropTypes.string.isRequired,
-//   body: PropTypes.string.isRequired,
-//   createdAt: PropTypes.string.isRequired,
-// };
+NoteItemBody.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+};
 export default NoteItemBody;

@@ -3,7 +3,7 @@ import SearchBar from "../components/SearchBar";
 import { getNotes, deleteNote } from "../utils/data";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 function HomepageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -82,4 +82,8 @@ class Homepage extends React.Component {
   }
 }
 
+Homepage.propTypes = {
+  defaultKeyword: PropTypes.string.isRequired,
+  keywordChange: PropTypes.func.isRequired,
+};
 export default HomepageWrapper;

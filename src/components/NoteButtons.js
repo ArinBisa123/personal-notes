@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function NoteButtons({ id, archived, onDelete, onArchive }) {
   return (
@@ -19,5 +20,10 @@ function NoteButtons({ id, archived, onDelete, onArchive }) {
     </div>
   );
 }
-
+NoteButtons.propTypes = {
+  id: PropTypes.number.isRequired,
+  archived: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+};
 export default NoteButtons;

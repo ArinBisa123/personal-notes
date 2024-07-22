@@ -1,6 +1,7 @@
 import React from "react";
 import NoteItemBody from "./NoteItemBody";
 import NoteButtons from "./NoteButtons";
+import PropTypes from "prop-types";
 
 function NoteItemContainer({
   title,
@@ -23,5 +24,15 @@ function NoteItemContainer({
     </div>
   );
 }
+
+NoteItemContainer.propTypes = {
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  archived: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+};
 
 export default NoteItemContainer;

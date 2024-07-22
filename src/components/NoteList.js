@@ -1,6 +1,7 @@
 import React from "react";
 import NoteItemContainer from "./NoteItemContainer";
 import EmptyMessage from "./EmptyMessage";
+import PropTypes from "prop-types";
 
 function NoteList({ notes, onDelete, onArchive, archive, keyword }) {
   const noteSearch = notes.filter((note) =>
@@ -23,5 +24,12 @@ function NoteList({ notes, onDelete, onArchive, archive, keyword }) {
     <EmptyMessage />
   );
 }
+NoteList.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  archive: PropTypes.bool.isRequired,
+  keyword: PropTypes.string.isRequired,
+};
 
 export default NoteList;
