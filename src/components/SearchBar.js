@@ -3,7 +3,13 @@ import { React } from "react";
 function SearchBar({ searchTitle, onSearch }) {
   return (
     <form>
-      <input type="text" placeholder="Cari Catatan..." value={searchTitle} onChange={onSearch} />
+      <input
+        className="search-bar"
+        type="text"
+        placeholder="Cari Catatan..."
+        value={searchTitle}
+        onChange={onSearch}
+      />
     </form>
   );
 }

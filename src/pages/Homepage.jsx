@@ -1,19 +1,27 @@
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-import { getNotes, deleteNote, showFormattedDate } from "../utils/data";
+import { getNotes, deleteNote } from "../utils/data";
 import React from "react";
-import InputField from "../components/InputField";
+import { useSearchParams } from "react-router-dom";
+
+function HomepageWrapper() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchTitle = searchParams.get("searchTitle");
+  function changeSearchParams(searchTitle) {
+    setSearchParams({ searchTitle });
+  }
+  return <Homepage searchTitle={searchTitle} onSearch={changeSearchParams} />;
+}
 
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       notes: getNotes(),
-      searchTitle: "",
+      searchTitle: props.searchTitle || "",
     };
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
-    this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
   onDeleteHandler(id) {
@@ -26,28 +34,14 @@ class Homepage extends React.Component {
     );
     this.setState({ notes: archiveNote });
   }
-  onAddNoteHandler({ title, body }) {
-    this.setState((prevState) => {
-      return {
-        notes: [
-          ...prevState.notes,
-          {
-            id: +new Date(),
-            title,
-            body,
-            createdAt: showFormattedDate(+new Date(), "yyyy/MM/dd kk:mm:ss"),
-            archived: false,
-          },
-        ],
-      };
-    });
-  }
+
   onSearchHandler(event) {
     this.setState(() => {
       return {
         searchTitle: event.target.value,
       };
     });
+    this.props.onSearch(event);
   }
 
   render() {
@@ -60,16 +54,11 @@ class Homepage extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="note-app__header ">
-          <h1>Notes</h1>
+        <div className="note-app__body">
           <SearchBar
             searchTitle={this.state.searchTitle}
             onSearch={this.onSearchHandler}
           ></SearchBar>
-        </div>
-        <div className="note-app__body">
-          <h2>Buat Catatan</h2>
-          <InputField addNote={this.onAddNoteHandler} />
           <h2>Catatan Aktif</h2>
           <NoteList
             notes={notYetArchivedNote}
@@ -90,4 +79,4 @@ class Homepage extends React.Component {
   }
 }
 
-export default Homepage;
+export default HomepageWrapper;
