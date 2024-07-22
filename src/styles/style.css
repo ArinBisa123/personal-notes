@@ -143,7 +143,7 @@ textarea::placeholder {
 .note-item__date {
   font-size: 12px;
   margin-bottom: 8px;
-  color: #aaa;
+  color: black;
   padding: 0 12px;
 }
 
