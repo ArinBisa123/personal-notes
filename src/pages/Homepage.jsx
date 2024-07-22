@@ -3,14 +3,17 @@ import SearchBar from "../components/SearchBar";
 import { getNotes, deleteNote } from "../utils/data";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+// import PropTypes from "prop-types";
 
 function HomepageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchTitle = searchParams.get("searchTitle");
-  function changeSearchParams(searchTitle) {
-    setSearchParams({ searchTitle });
+  const keyword = searchParams.get("keyword");
+  function changeSearchParams(keyword) {
+    setSearchParams({ keyword });
   }
-  return <Homepage searchTitle={searchTitle} onSearch={changeSearchParams} />;
+  return (
+    <Homepage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  );
 }
 
 class Homepage extends React.Component {
@@ -18,7 +21,7 @@ class Homepage extends React.Component {
     super(props);
     this.state = {
       notes: getNotes(),
-      searchTitle: props.defaultSearchTitle || "",
+      keyword: props.defaultKeyword || "",
     };
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
@@ -35,13 +38,13 @@ class Homepage extends React.Component {
     this.setState({ notes: archiveNote });
   }
 
-  onSearchHandler(event) {
+  onSearchHandler(keyword) {
     this.setState(() => {
       return {
-        searchTitle: event.target.value,
+        keyword,
       };
     });
-    this.props.onSearch(event);
+    this.props.keywordChange(keyword);
   }
 
   render() {
@@ -56,22 +59,22 @@ class Homepage extends React.Component {
       <React.Fragment>
         <div className="note-app__body">
           <SearchBar
-            searchTitle={this.state.searchTitle}
-            onSearch={this.onSearchHandler}
+            keyword={this.state.keyword}
+            keywordChange={this.onSearchHandler}
           ></SearchBar>
           <h2>Catatan Aktif</h2>
           <NoteList
             notes={notYetArchivedNote}
             onDelete={this.onDeleteHandler}
             onArchive={this.onArchiveHandler}
-            searchTitle={this.state.searchTitle}
+            keyword={this.state.keyword}
           />
           <h2>Arsip</h2>
           <NoteList
             notes={archivedNote}
             onDelete={this.onDeleteHandler}
             onArchive={this.onArchiveHandler}
-            searchTitle={this.state.searchTitle}
+            keyword={this.state.keyword}
           />
         </div>
       </React.Fragment>

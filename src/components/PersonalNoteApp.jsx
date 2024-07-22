@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Homepage from "../pages/Homepage";
+import HomepageWrapper from "../pages/Homepage";
 import DetailPageWrapper from "../pages/DetailNotePage";
 import Navigation from "./Navigation";
 import AddNotePage from "../pages/AddNotePage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function PersonalNoteApp() {
   return (
@@ -14,9 +15,10 @@ function PersonalNoteApp() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<Homepage />}></Route>
+          <Route path="/" element={<HomepageWrapper />}></Route>
           <Route path="/new" element={<AddNotePage />}></Route>
           <Route path="/detail/:id" element={<DetailPageWrapper />}></Route>
+          <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Routes>
       </main>
     </div>
