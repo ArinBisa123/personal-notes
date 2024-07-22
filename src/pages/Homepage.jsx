@@ -18,7 +18,7 @@ class Homepage extends React.Component {
     super(props);
     this.state = {
       notes: getNotes(),
-      searchTitle: props.searchTitle || "",
+      searchTitle: props.defaultSearchTitle || "",
     };
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
