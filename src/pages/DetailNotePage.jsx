@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom";
 import React from "react";
-import { getNoteByID } from "../utils/data";
+import { getNote } from "../utils/network-data";
 import NoteItemBody from "../components/NoteItemBody";
 import PropTypes from "prop-types";
 
 function DetailPageWrapper() {
   const { id } = useParams();
-  return <DetailPage id={Number(id)}></DetailPage>;
+  return <DetailPage id={id}></DetailPage>;
 }
 
 class DetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: getNoteByID(props.id),
+      notes: getNote(props.id),
     };
   }
 
@@ -32,6 +32,6 @@ class DetailPage extends React.Component {
   }
 }
 DetailPage.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 export default DetailPageWrapper;

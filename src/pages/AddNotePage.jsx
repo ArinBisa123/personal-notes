@@ -1,5 +1,5 @@
 import InputField from "../components/InputField";
-import { addNote } from "../utils/data";
+import { addNote } from "../utils/network-data";
 import { useNavigate } from "react-router-dom";
 
 function AddNotePage() {

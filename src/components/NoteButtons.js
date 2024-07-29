@@ -21,7 +21,7 @@ function NoteButtons({ id, archived, onDelete, onArchive }) {
   );
 }
 NoteButtons.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired,
   onDelete: PropTypes.func.isRequired,
   onArchive: PropTypes.func.isRequired,

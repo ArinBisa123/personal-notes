@@ -1,9 +1,11 @@
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-import { getNotes, deleteNote } from "../utils/data";
+// import { getNotes, deleteNote } from "../utils/data";
+import { getActiveNotes, deleteNote } from "../utils/network-data";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
+// import { getActiveNotes } from "../utils/network-data";
 
 function HomepageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,16 +22,30 @@ class Homepage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: getNotes(),
+      notes: [],
       keyword: props.defaultKeyword || "",
     };
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
     this.onSearchHandler = this.onSearchHandler.bind(this);
   }
+  async componentDidMount() {
+    const { data } = await getActiveNotes();
+    this.setState(() => {
+      return {
+        notes: data,
+      };
+    });
+  }
   onDeleteHandler(id) {
     deleteNote(id);
-    this.setState({ notes: getNotes() });
+    // update note state from api
+    const { data } = getActiveNotes();
+    this.setState(() => {
+      return {
+        notes: data,
+      };
+    });
   }
   onArchiveHandler(id) {
     const archiveNote = this.state.notes.map((note) =>

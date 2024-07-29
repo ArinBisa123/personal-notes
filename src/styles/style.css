@@ -30,8 +30,21 @@ textarea::placeholder {
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  font-size: 30px;
   gap: 20px;
+  align-items: center;
+}
+.navigation li p {
+  font-size: 20px;
+}
+.navigation li button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cdb4db;
+}
+svg {
+  font-size: 30px;
 }
 .note-app__header {
   display: flex;
@@ -185,6 +198,57 @@ textarea::placeholder {
   color: #b00020;
 }
 
+.register-page {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px;
+}
+.register-page p {
+  margin-top: 20px;
+  font-weight: bold;
+}
+.register-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register-input input {
+  width: 90%;
+}
+.register-input button {
+  width: 45%;
+  height: 50px;
+  background-color: #ff5f52;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.login-page {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px;
+}
+.login-page p {
+  margin-top: 20px;
+  font-weight: bold;
+}
+.login-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-input input {
+  width: 90%;
+}
+.login-input button {
+  width: 45%;
+  height: 50px;
+  background-color: #ff5f52;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
@@ -200,10 +264,3 @@ textarea::placeholder {
     min-width: 400px;
   }
 }
-
-/* @media only screen and (min-width: 800px) {
-    .notes-list {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-   */
