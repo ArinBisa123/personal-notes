@@ -5,7 +5,6 @@ import { getActiveNotes, deleteNote } from "../utils/network-data";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
-// import { getActiveNotes } from "../utils/network-data";
 
 function HomepageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();

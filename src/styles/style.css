@@ -6,8 +6,24 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #ffafcc;
-  color: black;
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+}
+
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: #333;
+}
+.button-slider {
+  background: transparent;
+  color: var(--font-color);
+  font-size: 48px;
+  border: 0;
+  cursor: pointer;
 }
 
 input,
@@ -16,14 +32,14 @@ textarea {
   margin: 12px 0;
   font-family: "Inter", sans-serif;
   background-color: transparent;
-  color: black;
+  /* color: black; */
   border: 5px solid #cdb4db;
   border-radius: 4px;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: black;
+  /* color: black; */
   font-weight: bold;
 }
 .navigation ul {
@@ -36,7 +52,7 @@ textarea::placeholder {
 .navigation li p {
   font-size: 20px;
 }
-.navigation li button {
+.logout-button {
   width: 50px;
   height: 50px;
   border: none;
@@ -57,7 +73,7 @@ svg {
 .note-app__header h1 {
   margin: 8px 0;
   flex: 1;
-  color: white;
+  /* color: white; */
 }
 
 .note-app__body {
@@ -95,7 +111,7 @@ svg {
 .note-input__title__char-limit {
   font-size: 14px;
   text-align: right;
-  color: black;
+  /* color: black; */
 }
 
 .note-input__body {
@@ -156,7 +172,7 @@ svg {
 .note-item__date {
   font-size: 12px;
   margin-bottom: 8px;
-  color: black;
+  /* color: black; */
   padding: 0 12px;
 }
 

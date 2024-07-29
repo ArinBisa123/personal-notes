@@ -8,6 +8,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import { getUserLogged, putAccessToken } from "../utils/network-data";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
 class PersonalNoteApp extends React.Component {
   constructor(props) {
@@ -15,6 +16,16 @@ class PersonalNoteApp extends React.Component {
     this.state = {
       authedUser: null,
       initiaziling: true,
+      theme: localStorage.getItem("theme") || "light",
+      slideTheme: () => {
+        this.setState((prevState) => {
+          const newTheme = prevState.theme === "light" ? "dark" : "light";
+          localStorage.setItem("theme", newTheme);
+          return {
+            theme: newTheme,
+          };
+        });
+      },
     };
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
     this.onLogout = this.onLogout.bind(this);
@@ -44,6 +55,12 @@ class PersonalNoteApp extends React.Component {
         initiaziling: false,
       };
     });
+    document.documentElement.setAttribute("data-theme", this.state.theme);
+  }
+  componentDidUpdate(prevState) {
+    if (prevState.theme !== this.state.theme) {
+      document.documentElement.setAttribute("data-theme", this.state.theme);
+    }
   }
   render() {
     if (this.state.initiaziling) {
@@ -68,43 +85,27 @@ class PersonalNoteApp extends React.Component {
       );
     }
     return (
-      <div className="note-app">
-        <header className="note-app__header">
-          <h1>Notes</h1>
-          <Navigation
-            logout={this.onLogout}
-            name={this.state.authedUser.name}
-          />
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomepageWrapper />}></Route>
-            <Route path="/new" element={<AddNotePage />}></Route>
-            <Route path="/detail/:id" element={<DetailPageWrapper />}></Route>
-            <Route path="*" element={<NotFoundPage />}></Route>
-          </Routes>
-        </main>
-      </div>
+      <ThemeProvider value={this.state}>
+        <div className="note-app">
+          <header className="note-app__header">
+            <h1>Notes</h1>
+            <Navigation
+              logout={this.onLogout}
+              name={this.state.authedUser.name}
+            />
+          </header>
+          <main>
+            <Routes>
+              <Route path="/" element={<HomepageWrapper />}></Route>
+              <Route path="/new" element={<AddNotePage />}></Route>
+              <Route path="/detail/:id" element={<DetailPageWrapper />}></Route>
+              <Route path="*" element={<NotFoundPage />}></Route>
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
     );
   }
 }
 
-// function PersonalNoteApp() {
-//   return (
-//     <div className="note-app">
-//       <header className="note-app__header">
-//         <h1>Notes</h1>
-//         <Navigation />
-//       </header>
-//       <main>
-//         <Routes>
-//           <Route path="/" element={<HomepageWrapper />}></Route>
-//           <Route path="/new" element={<AddNotePage />}></Route>
-//           <Route path="/detail/:id" element={<DetailPageWrapper />}></Route>
-//           <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
-//         </Routes>
-//       </main>
-//     </div>
-//   );
-// }
 export default PersonalNoteApp;
