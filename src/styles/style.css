@@ -166,7 +166,7 @@ svg {
 }
 
 .note-item__content {
-  padding: 12px;
+  padding: 10px;
   flex: 1;
   min-height: 200px;
 }
@@ -274,7 +274,12 @@ svg {
   border-radius: 5px;
   font-weight: bold;
 }
-
+.detail-page {
+  margin: 20px;
+}
+section .note-item__body {
+  padding-top: 10px;
+}
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;

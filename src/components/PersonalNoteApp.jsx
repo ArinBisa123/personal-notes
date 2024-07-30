@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomepageWrapper from "../pages/Homepage";
-// import DetailPageWrapper from "../pages/DetailNotePage";
 import DetailNotePage from "../pages/DetailNotePage";
 import Navigation from "./Navigation";
 import AddNotePage from "../pages/AddNotePage";
