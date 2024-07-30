@@ -1,17 +1,26 @@
 import { React } from "react";
 import PropTypes from "prop-types";
+import { LangConsumer } from "../contexts/LangContext";
 
 function SearchBar({ keyword, keywordChange }) {
   return (
-    <form>
-      <input
-        className="search-bar"
-        type="text"
-        placeholder="Cari Catatan..."
-        value={keyword}
-        onChange={(event) => keywordChange(event.target.value)}
-      />
-    </form>
+    <LangConsumer>
+      {({ language }) => {
+        return (
+          <form>
+            <input
+              className="search-bar"
+              type="text"
+              placeholder={
+                language === "id" ? "Cari catatan.." : "Search notes"
+              }
+              value={keyword}
+              onChange={(event) => keywordChange(event.target.value)}
+            />
+          </form>
+        );
+      }}
+    </LangConsumer>
   );
 }
 

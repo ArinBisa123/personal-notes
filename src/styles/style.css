@@ -58,6 +58,16 @@ textarea::placeholder {
   border: none;
   border-radius: 5px;
   background-color: #cdb4db;
+  cursor: pointer;
+}
+.language-button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cdb4db;
+  cursor: pointer;
+  font-weight: bold;
 }
 svg {
   font-size: 30px;
@@ -203,11 +213,11 @@ svg {
 }
 
 .note-item__archive-button {
-  color: #fff263;
+  color: #a8dadc;
 }
 
 .note-item__archive-button:hover {
-  color: #c49000;
+  color: #457b9d;
 }
 
 .note-item__delete-button:hover {

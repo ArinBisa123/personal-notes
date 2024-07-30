@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { LangConsumer } from "../contexts/LangContext";
 
 class InputField extends React.Component {
   constructor(props) {
@@ -32,9 +33,7 @@ class InputField extends React.Component {
   }
   onSubmitEventHandler(event) {
     event.preventDefault();
-    //eslint-disable-next-line
     const title = this.state.title;
-    //eslint-disable-next-line
     const body = this.state.body;
     this.props.addNote(this.state);
     this.setState({
@@ -46,26 +45,39 @@ class InputField extends React.Component {
 
   render() {
     return (
-      <form className="note-input" onSubmit={this.onSubmitEventHandler}>
-        <p className="note-input__title__char-limit">
-          Sisa Karakter {this.state.limit}
-        </p>
-        <input
-          className="note-input__title"
-          type="text"
-          placeholder="Judul"
-          value={this.state.title}
-          onChange={this.onTitleChangeEventHandler}
-        ></input>
-        <textarea
-          className="note-input__body"
-          type="text"
-          placeholder="Tuliskan Deskripsi Catatan..."
-          value={this.state.body}
-          onChange={this.onBodyChangeEventHandler}
-        />
-        <button type="submit">Buat</button>
-      </form>
+      <LangConsumer>
+        {({ language }) => {
+          return (
+            <form className="note-input" onSubmit={this.onSubmitEventHandler}>
+              <p className="note-input__title__char-limit">
+                {language === "id" ? "Sisa Karakter:" : "Character Remaining:"}{" "}
+                {this.state.limit}
+              </p>
+              <input
+                className="note-input__title"
+                type="text"
+                placeholder={language === "id" ? "Judul" : "Title"}
+                value={this.state.title}
+                onChange={this.onTitleChangeEventHandler}
+              ></input>
+              <textarea
+                className="note-input__body"
+                type="text"
+                placeholder={
+                  language === "id"
+                    ? "Tuliskan Deskripsi Catatan..."
+                    : "Write description..."
+                }
+                value={this.state.body}
+                onChange={this.onBodyChangeEventHandler}
+              />
+              <button type="submit">
+                {language === "id" ? "Buat" : "Create"}
+              </button>
+            </form>
+          );
+        }}
+      </LangConsumer>
     );
   }
 }

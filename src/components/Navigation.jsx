@@ -3,11 +3,15 @@ import { FcPlus, FcHome } from "react-icons/fc";
 import { FaDoorOpen } from "react-icons/fa";
 import PropTypes from "prop-types";
 import SliderTheme from "./SliderTheme";
+import SliderLanguage from "./SliderLanguage";
 
 function Navigation({ logout, name }) {
   return (
     <nav className="navigation">
       <ul>
+        <li>
+          <SliderLanguage />
+        </li>
         <li>
           <SliderTheme />
         </li>
@@ -22,7 +26,6 @@ function Navigation({ logout, name }) {
           </Link>
         </li>
         <li>
-          {" "}
           <p>{name}</p>
         </li>
         <li>

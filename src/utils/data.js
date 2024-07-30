@@ -101,7 +101,7 @@ function addNote({ title, body }) {
       id: +new Date(),
       title,
       body,
-      createdAt: showFormattedDate(+new Date(), "yyyy/MM/dd kk:mm:ss"),
+      createdAt: showFormattedDateToId(+new Date(), "yyyy/MM/dd kk:mm:ss"),
       archived: false,
     },
   ];
@@ -110,7 +110,7 @@ function deleteNote(id) {
   notes = notes.filter((note) => note.id !== id);
 }
 
-const showFormattedDate = (date) => {
+const showFormattedDateToId = (date) => {
   const options = {
     weekday: "long",
     year: "numeric",
@@ -120,4 +120,21 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options);
 };
 
-export { getNotes, getNoteByID, addNote, deleteNote, showFormattedDate };
+const showFormattedDateToEn = (date) => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return new Date(date).toLocaleDateString("en-GB", options);
+};
+
+export {
+  getNotes,
+  getNoteByID,
+  addNote,
+  deleteNote,
+  showFormattedDateToId,
+  showFormattedDateToEn,
+};

@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomepageWrapper from "../pages/Homepage";
-import DetailPageWrapper from "../pages/DetailNotePage";
+// import DetailPageWrapper from "../pages/DetailNotePage";
+import DetailNotePage from "../pages/DetailNotePage";
 import Navigation from "./Navigation";
 import AddNotePage from "../pages/AddNotePage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -9,6 +10,7 @@ import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import { getUserLogged, putAccessToken } from "../utils/network-data";
 import { ThemeProvider } from "../contexts/ThemeContext";
+import { LangProvider } from "../contexts/LangContext";
 
 class PersonalNoteApp extends React.Component {
   constructor(props) {
@@ -25,6 +27,22 @@ class PersonalNoteApp extends React.Component {
             theme: newTheme,
           };
         });
+      },
+      langContext: {
+        language: localStorage.getItem("language") || "id",
+        toggleLanguage: () => {
+          this.setState((prevState) => {
+            const newLanguage =
+              prevState.langContext.language === "id" ? "en" : "id";
+            localStorage.setItem("language", newLanguage);
+            return {
+              langContext: {
+                ...prevState.langContext,
+                language: newLanguage,
+              },
+            };
+          });
+        },
       },
     };
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
@@ -68,42 +86,46 @@ class PersonalNoteApp extends React.Component {
     }
     if (this.state.authedUser == null) {
       return (
-        <div className="note-app">
-          <header className="note-app__header">
-            <h1>Notes</h1>
-          </header>
-          <main>
-            <Routes>
-              <Route
-                path="/*"
-                element={<LoginPage loginSuccess={this.onLoginSuccess} />}
-              ></Route>
-              <Route path="/register" element={<RegisterPage />}></Route>
-            </Routes>
-          </main>
-        </div>
+        <LangProvider>
+          <div className="note-app">
+            <header className="note-app__header">
+              <h1>Notes</h1>
+            </header>
+            <main>
+              <Routes>
+                <Route
+                  path="/*"
+                  element={<LoginPage loginSuccess={this.onLoginSuccess} />}
+                ></Route>
+                <Route path="/register" element={<RegisterPage />}></Route>
+              </Routes>
+            </main>
+          </div>
+        </LangProvider>
       );
     }
     return (
-      <ThemeProvider value={this.state}>
-        <div className="note-app">
-          <header className="note-app__header">
-            <h1>Notes</h1>
-            <Navigation
-              logout={this.onLogout}
-              name={this.state.authedUser.name}
-            />
-          </header>
-          <main>
-            <Routes>
-              <Route path="/" element={<HomepageWrapper />}></Route>
-              <Route path="/new" element={<AddNotePage />}></Route>
-              <Route path="/detail/:id" element={<DetailPageWrapper />}></Route>
-              <Route path="*" element={<NotFoundPage />}></Route>
-            </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
+      <LangProvider value={this.state.langContext}>
+        <ThemeProvider value={this.state}>
+          <div className="note-app">
+            <header className="note-app__header">
+              <h1>Notes</h1>
+              <Navigation
+                logout={this.onLogout}
+                name={this.state.authedUser.name}
+              />
+            </header>
+            <main>
+              <Routes>
+                <Route path="/" element={<HomepageWrapper />}></Route>
+                <Route path="/new" element={<AddNotePage />}></Route>
+                <Route path="/detail/:id" element={<DetailNotePage />}></Route>
+                <Route path="*" element={<NotFoundPage />}></Route>
+              </Routes>
+            </main>
+          </div>
+        </ThemeProvider>
+      </LangProvider>
     );
   }
 }

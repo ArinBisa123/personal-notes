@@ -1,10 +1,10 @@
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-// import { getNotes, deleteNote } from "../utils/data";
 import { getActiveNotes, deleteNote } from "../utils/network-data";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { LangConsumer } from "../contexts/LangContext";
 
 function HomepageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,10 +36,10 @@ class Homepage extends React.Component {
       };
     });
   }
-  onDeleteHandler(id) {
-    deleteNote(id);
+  async onDeleteHandler(id) {
+    await deleteNote(id);
     // update note state from api
-    const { data } = getActiveNotes();
+    const { data } = await getActiveNotes();
     this.setState(() => {
       return {
         notes: data,
@@ -71,28 +71,34 @@ class Homepage extends React.Component {
     });
 
     return (
-      <React.Fragment>
-        <div className="note-app__body">
-          <SearchBar
-            keyword={this.state.keyword}
-            keywordChange={this.onSearchHandler}
-          ></SearchBar>
-          <h2>Catatan Aktif</h2>
-          <NoteList
-            notes={notYetArchivedNote}
-            onDelete={this.onDeleteHandler}
-            onArchive={this.onArchiveHandler}
-            keyword={this.state.keyword}
-          />
-          <h2>Arsip</h2>
-          <NoteList
-            notes={archivedNote}
-            onDelete={this.onDeleteHandler}
-            onArchive={this.onArchiveHandler}
-            keyword={this.state.keyword}
-          />
-        </div>
-      </React.Fragment>
+      <LangConsumer>
+        {({ language }) => {
+          return (
+            <>
+              <div className="note-app__body">
+                <SearchBar
+                  keyword={this.state.keyword}
+                  keywordChange={this.onSearchHandler}
+                ></SearchBar>
+                <h2>{language === "id" ? "Catatan Aktif" : "Active Notes"}</h2>
+                <NoteList
+                  notes={notYetArchivedNote}
+                  onDelete={this.onDeleteHandler}
+                  onArchive={this.onArchiveHandler}
+                  keyword={this.state.keyword}
+                />
+                <h2>{language === "id" ? "Catatan Arsip" : "Archive Notes"}</h2>
+                <NoteList
+                  notes={archivedNote}
+                  onDelete={this.onDeleteHandler}
+                  onArchive={this.onArchiveHandler}
+                  keyword={this.state.keyword}
+                />
+              </div>
+            </>
+          );
+        }}
+      </LangConsumer>
     );
   }
 }
